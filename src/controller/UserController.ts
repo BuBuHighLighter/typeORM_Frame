@@ -23,8 +23,8 @@ export class UserController {
         await this.userRepository.remove(userToRemove);
     }
 
-    async fd(req: Request, response: Response, next: NextFunction) {
-        console.log(req.body);
+    async fd1(req: Request, response: Response, next: NextFunction) {
+        return console.log(req.body);
     }
 
 }

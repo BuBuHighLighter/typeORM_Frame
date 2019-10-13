@@ -23,7 +23,7 @@ export const Users = [{
     route: "/fd",
     action: "fd"
 }, {
-    method: "delete",
+    method: "get",
     route: "/fd",
     action: "fd"
 }, ];
