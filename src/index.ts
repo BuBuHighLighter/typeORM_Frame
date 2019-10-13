@@ -7,9 +7,8 @@ import { Routes } from "./routes/index";
 import { User } from "./entity/User";
 import { RoutesModal } from './modals/routes';
 
-import { fd } from './middlewares/fd';
+import { Console } from './middlewares/console';
 import { RequestMiddleware } from './middlewares/request';
-import { Log } from './modals/log';
 import { Config } from './config';
 
 createConnection().then(async connection => {
@@ -21,19 +20,19 @@ createConnection().then(async connection => {
     app.use(bodyParser.json());
     app.use(RequestMiddleware.requestInfo());
     app.use(RequestMiddleware.responseSend());
+
+    // 开发环境使用的中间件
     if ('DEV' === Config.ENV.toUpperCase()) {
-        app.use(fd());
+        app.use(Console());
     }
 
     // register express routes from defined application routes
     Routes.forEach((route: RoutesModal) => {
         (app as any)[route.method](route.route, (req: Request, res: Response, next: Function) => {
             let result;
-            try {
-                result = (new (route.controller as any))[route.action](req, res, next);
-            } catch (error) {
-                return res.error(error, Config.ENV);
-            }
+                result = (new (route.controller as any))[route.action](req, res, next).catch(error => {
+                    return res.error(error, Config.ENV);
+                });                
             if (result instanceof Promise) {
                 result.then(
                     (result) => {
@@ -67,6 +66,5 @@ createConnection().then(async connection => {
     console.log("Express server has started on port 3000. Open http://localhost:3000/users to see results");
 
 }).catch((error) => {
-    console.log('fd error');
     console.log(error);
 });

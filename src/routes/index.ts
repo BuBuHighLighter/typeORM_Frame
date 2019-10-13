@@ -5,9 +5,9 @@ import {Users} from './users';
 // 合并每个数组
 function concatRoutes(...args: any[]): RoutesModal[] {
     const routes: RoutesModal[] = [];
-    args.map( (item: {route: string, action: string, method: string}[]) => {
-        item.map( a => {
-            routes.push(new RoutesModal(a.method, a.route, a.action));
+    args.map( (item: RoutesModal[]) => {
+        item.map( (item: RoutesModal) => {
+            routes.push(new RoutesModal(item.method, item.route, item.action, item.controller));
         })
     })
     return routes;

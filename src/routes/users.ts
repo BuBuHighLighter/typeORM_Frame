@@ -1,29 +1,38 @@
+import {UserController} from "../controller/UserController";
+
 export const Users = [{
     method: "get",
     route: "/users",
-    action: "all"
+    action: "all",
+    controller: UserController,
 }, {
     method: "get",
     route: "/users/:id",
-    action: "one"
+    action: "one",
+    controller: UserController,
 }, {
     method: "post",
     route: "/users",
-    action: "save"
+    action: "save",
+    controller: UserController,
 }, {
     method: "delete",
     route: "/users/:id",
-    action: "remove"
+    action: "remove",
+    controller: UserController,
 }, {
     method: "post",
     route: "/fd",
-    action: "fd"
+    action: "fd",
+    controller: UserController,
 }, {
     method: "put",
     route: "/fd",
-    action: "fd"
+    action: "fd",
+    controller: UserController,
 }, {
     method: "get",
     route: "/fd",
-    action: "fd"
+    action: "fd",
+    controller: UserController,
 }, ];

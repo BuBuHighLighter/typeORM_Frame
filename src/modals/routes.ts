@@ -1,5 +1,3 @@
-import {UserController} from "../controller/UserController";
-
 /**
  * 封装路由的类
  */
@@ -10,12 +8,12 @@ export class RoutesModal {
 
     public action: string;
 
-    public controller: any = UserController;
+    public controller: any;
 
     constructor(method: string,
                 route: string,
                 action: string,
-                controller: any = UserController) {
+                controller: any) {
                     this.method = method;
                     this.route = route;
                     this.action = action;
